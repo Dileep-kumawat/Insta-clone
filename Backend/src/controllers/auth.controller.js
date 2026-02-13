@@ -1,6 +1,7 @@
 const userModel = require("../models/user.model");
+const postModel = require("../models/post.model");
 const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
+const bcrypt = require("bcryptjs");
 
 const registerController = async (req, res) => {
     const { email, username, password, bio } = req.body;
@@ -21,7 +22,7 @@ const registerController = async (req, res) => {
     const user = await userModel.create({
         username,
         email,
-        password: crypto.createHash("md5").update(password).digest('hex'),
+        password: await bcrypt.hash(password, 10),
         bio
     })
 
@@ -58,9 +59,9 @@ const loginController = async (req, res) => {
         });
     }
 
-    const hash = crypto.createHash("md5").update(password).digest("hex");
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
-    if (!(user.password === hash)) {
+    if (!isPasswordCorrect) {
         return res.status(401).json({
             "msg": "password invalid"
         });
