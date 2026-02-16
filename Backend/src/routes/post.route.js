@@ -14,4 +14,9 @@ postRouter.post("/", upload.single("imgUrl"), postController.postCreateControlle
  */
 postRouter.get("/", postController.getPostsController);
 
+/**
+ * GET api/posts/details/:id
+ */
+postRouter.get("/details/:id", postController.getPostDetailsController);
+
 module.exports = postRouter; 

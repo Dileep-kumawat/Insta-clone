@@ -63,7 +63,48 @@ const getPostsController = async (req, res) => {
     });
 }
 
+const getPostDetailsController = async (req, res) => {
+    const token = req.cookies.jwt_token;
+
+    if (!token) {
+        return res.status(401).json({
+            "msg": "Token not found"
+        });
+    }
+
+    let decoded;
+    try {
+        decoded = jwt.verify(token, process.env.JWT_SECRET);
+    } catch (err) {
+        return res.status(401).json({
+            "msg": "The Token is unauthorized"
+        });
+    }
+
+    const post = await postModel.findById(req.params.id);
+
+    if (!post) {
+        return res.status(404).json({
+            "msg": "The post not found"
+        });
+    }
+
+    const isUserValid = post.user.toString() === decoded.id;
+
+    if (!isUserValid) {
+        return res.status(401).json({
+            "msg": "The user is unauthorized"
+        });
+    }
+
+    res.status(200).json({
+        "msg": "The post is fetched",
+        post
+    });
+}
+
 module.exports = {
     postCreateController,
-    getPostsController
+    getPostsController,
+    getPostDetailsController
 }
