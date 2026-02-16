@@ -5,8 +5,13 @@ const multer = require("multer");
 const upload = multer({ storage: multer.memoryStorage() });
 
 /**
- * POST api/post/
+ * POST api/posts/
  */
 postRouter.post("/", upload.single("imgUrl"), postController.postCreateController);
+
+/**
+ * GET api/posts/
+ */
+postRouter.get("/", postController.getPostsController);
 
 module.exports = postRouter; 

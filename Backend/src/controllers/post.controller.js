@@ -35,6 +35,35 @@ const postCreateController = async (req, res) => {
     });
 }
 
+const getPostsController = async (req, res) => {
+    const token = req.cookies.jwt_token;
+
+    if (!token) {
+        return res.status(401).json({
+            "msg": "Token not found"
+        });
+    }
+
+    let decoded;
+    try {
+        decoded = jwt.verify(token, process.env.JWT_SECRET);
+    } catch (err) {
+        return res.status(401).json({
+            "msg": "The token is unauthorized"
+        });
+    }
+
+    const posts = await postModel.find({
+        user: decoded.id
+    });
+
+    res.status(200).json({
+        msg: "The posts are fetched",
+        posts
+    });
+}
+
 module.exports = {
-    postCreateController
+    postCreateController,
+    getPostsController
 }
