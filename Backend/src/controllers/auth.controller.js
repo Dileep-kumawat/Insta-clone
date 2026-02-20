@@ -1,49 +1,52 @@
 const userModel = require("../models/user.model");
-const postModel = require("../models/post.model");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 
-const registerController = async (req, res) => {
-    const { email, username, password, bio } = req.body;
+async function registerController(req, res) {
+    const { username, email, password, bio } = req.body;
 
-    const isUserAlreadyExists = await userModel.findOne({
+    const isUserAlreadyExist = await userModel.findOne({
         $or: [
-            { email },
-            { username }
+            {
+                username
+            }, {
+                email
+            }
         ]
     });
 
-    if (isUserAlreadyExists) {
+    if (isUserAlreadyExist) {
         return res.status(409).json({
-            "msg": "The user already exists"
+            msg: "User already exists, please try to login"
         });
     }
 
-    const user = await userModel.create({
-        username,
-        email,
-        password: await bcrypt.hash(password, 10),
-        bio
-    })
+    let user = null;
+    try {
+        user = await userModel.create({
+            username,
+            email,
+            password: await bcrypt.hash(password, 10),
+            bio
+        });
+    } catch (err) {
+        console.log(err + " Problem in register controller at creating an user");
+    }
 
     const token = jwt.sign({
-        id: user._id
-    }, process.env.JWT_SECRET, { expiresIn: "1d" });
+        id: user._id,
+        email: user.email
+    }, process.env.JWT_SECRET);
 
-    res.cookie("jwt_token", token);
+    res.cookie("token", token);
 
     res.status(201).json({
         "msg": "User created successfully",
-        user: {
-            username: user.username,
-            email: user.email,
-            bio: user.bio,
-            profileImage: user.profileImage
-        }
+        user
     });
 }
 
-const loginController = async (req, res) => {
+async function loginController(req, res) {
     const { username, email, password } = req.body;
 
     const user = await userModel.findOne({
@@ -55,26 +58,27 @@ const loginController = async (req, res) => {
 
     if (!user) {
         return res.status(404).json({
-            "msg": "The user not found"
+            "msg": "user not found, check your credentials"
         });
     }
 
-    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(password, user.password);
 
-    if (!isPasswordCorrect) {
+    if (!isPasswordValid) {
         return res.status(401).json({
-            "msg": "password invalid"
+            "msg": "Wrong credentials"
         });
     }
 
     const token = jwt.sign({
-        id: user._id
-    }, process.env.JWT_SECRET, { expiresIn: "1d" });
+        id: user._id,
+        email: user.email
+    }, process.env.JWT_SECRET);
 
-    res.cookie("jwt_token", token);
+    res.cookie("token", token);
 
     res.status(200).json({
-        "msg": "login successfull " + (user.email === email ? user.email : user.username),
+        "msg": "User login successfull - " + (user.email === email ? user.email : user.username)
     });
 }
 

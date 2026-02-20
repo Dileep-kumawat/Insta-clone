@@ -1,104 +1,66 @@
-const ImageKit = require("@imagekit/nodejs");
+const ImageKit = require('@imagekit/nodejs');
+const { toFile } = require('@imagekit/nodejs');
 const postModel = require("../models/post.model");
-const jwt = require("jsonwebtoken");
-const { toFile } = require("@imagekit/nodejs")
 
-const imagekit = new ImageKit({
-    privateKey: process.env.IMAGEKIT_PRIVATE_KEY
-})
+async function postCreateController(req, res) {
+    const { caption } = req.body;
 
-const postCreateController = async (req, res) => {
+    const client = new ImageKit({
+        privateKey: process.env['IMAGEKIT_PRIVATE_KEY'],
+    });
 
-    let decoded;
-    try {
-        decoded = jwt.verify(req.cookies.jwt_token, process.env.JWT_SECRET);
-    } catch (err) {
-        return res.status(401).json({
-            "msg": "The token is unauthorized"
-        });
-    }
-
-    const file = await imagekit.files.upload({
+    const file = await client.files.upload({
         file: await toFile(Buffer.from(req.file.buffer), 'file'),
-        fileName: "Test"
+        fileName: req.file.originalname,
+        folder: "garbage"
     });
 
     const post = await postModel.create({
-        caption: req.body.caption,
+        caption,
         imgUrl: file.url,
-        user: decoded.id
+        user: req.user.id
     });
 
+    if (!post) {
+        return res.status(500).json({
+            "msg": "post not created"
+        });
+    }
+
     res.status(201).json({
-        "msg": "The post is created successfully",
+        "msg": "post created successfully",
         post
     });
 }
 
-const getPostsController = async (req, res) => {
-    const token = req.cookies.jwt_token;
-
-    if (!token) {
-        return res.status(401).json({
-            "msg": "Token not found"
-        });
-    }
-
-    let decoded;
-    try {
-        decoded = jwt.verify(token, process.env.JWT_SECRET);
-    } catch (err) {
-        return res.status(401).json({
-            "msg": "The token is unauthorized"
-        });
-    }
-
+async function getPostsController(req, res) {
     const posts = await postModel.find({
-        user: decoded.id
+        user: req.user.id
     });
 
     res.status(200).json({
-        msg: "The posts are fetched",
         posts
     });
 }
 
-const getPostDetailsController = async (req, res) => {
-    const token = req.cookies.jwt_token;
-
-    if (!token) {
-        return res.status(401).json({
-            "msg": "Token not found"
-        });
-    }
-
-    let decoded;
-    try {
-        decoded = jwt.verify(token, process.env.JWT_SECRET);
-    } catch (err) {
-        return res.status(401).json({
-            "msg": "The Token is unauthorized"
-        });
-    }
-
+async function getPostDetailsController(req, res) {
     const post = await postModel.findById(req.params.id);
 
     if (!post) {
         return res.status(404).json({
-            "msg": "The post not found"
+            "msg": "Post not found"
         });
     }
 
-    const isUserValid = post.user.toString() === decoded.id;
+    const isUserspost = post.user.toString() === req.user.id;
 
-    if (!isUserValid) {
+    if (!isUserspost) {
         return res.status(401).json({
-            "msg": "The user is unauthorized"
+            "msg": "You can't access this post | unauthorized"
         });
     }
 
     res.status(200).json({
-        "msg": "The post is fetched",
         post
     });
 }
