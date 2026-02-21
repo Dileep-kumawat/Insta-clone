@@ -69,7 +69,90 @@ async function unFollowController(req, res) {
     })
 }
 
+async function getPendingFollowersController(req, res) {
+    const user = req.user.id;
+
+    const pendingRecords = await followModel.find({ following: user, status: "pending" });
+
+    res.status(200).json({
+        "msg": "Successfully fetched all records",
+        noOfPendings: pendingRecords.length,
+        pendingRecords
+    });
+}
+
+async function acceptFollowRequestController(req, res) {
+    const user = req.user.id;
+    const followerId = req.params.id;
+
+    let followRecord = null;
+    try {
+        followRecord = await followModel.findOneAndUpdate({
+            follower: followerId,
+            following: user,
+            status: "pending"
+        }, {
+            status: "accepted"
+        }, {
+            new: true,
+            runValidators: true
+        });
+    } catch (error) {
+        return res.status(400).json({
+            "msg": "Invalid id of the user"
+        });
+    }
+
+    if (!followRecord) {
+        return res.status(404).json({
+            msg: "No pending follow request found"
+        });
+    }
+
+    res.status(200).json({
+        "msg": "Follow request accepted successfully",
+        followRecord
+    });
+}
+
+async function rejectFollowRequestController(req, res) {
+    const user = req.user.id;
+    const followerId = req.params.id;
+
+    let followRecord = null;
+    try {
+        followRecord = await followModel.findOneAndUpdate({
+            follower: followerId,
+            following: user,
+            status: "pending"
+        }, {
+            status: "rejected"
+        }, {
+            new: true,
+            runValidators: true
+        });
+    } catch (error) {
+        return res.status(400).json({
+            "msg": "Invalid id of the user"
+        });
+    }
+
+    if (!followRecord) {
+        return res.status(404).json({
+            msg: "No pending follow request found"
+        });
+    }
+
+    res.status(200).json({
+        "msg": "Follow request rejected successfully",
+        followRecord
+    });
+}
+
 module.exports = {
     followController,
-    unFollowController
+    unFollowController,
+    getPendingFollowersController,
+    acceptFollowRequestController,
+    rejectFollowRequestController
 }
