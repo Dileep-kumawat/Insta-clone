@@ -1,5 +1,7 @@
 import { useState } from "react"
 import axios from 'axios'
+import '../styles/form.scss'
+import { Link } from "react-router-dom";
 
 const Register = () => {
     const [form, setForm] = useState({
@@ -22,8 +24,29 @@ const Register = () => {
 
     return (
         <main>
-            <div className="container">
-                <h2>Register : </h2>
+            <div className="left">
+                <div className="logo">
+                    <img src="primary-logo.png" alt="primary log" />
+                </div>
+
+                <div className="center">
+                    <div className="text">
+                        <div className="up">
+                            Join today and start capturing
+                        </div>
+                        <div className="down">
+                            the moments that matter.
+                        </div>
+                    </div>
+
+                    <div className="pic">
+                        <img src="register-pic.png" alt="login pic" />
+                    </div>
+                </div>
+            </div>
+
+            <div className="right">
+                <h2>Get started on Instagram : </h2>
                 <form onSubmit={formSubmitHandler}>
                     <input
                         onChange={(e) => {
@@ -61,8 +84,9 @@ const Register = () => {
                         value={form.password}
                         type="password"
                         placeholder="Enter the password" />
-                    <input type="submit" />
+                    <input className="submit" type="submit" />
                 </form>
+                <p>Already have account : <Link to="/login">Login</Link> </p>
             </div>
         </main>
     )

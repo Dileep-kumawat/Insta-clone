@@ -1,0 +1,117 @@
+main {
+    height: 100%;
+    width: 100%;
+    background-color: var(--ig-background-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .left,
+    .right {
+        width: 50%;
+        height: 100%;
+    }
+
+    .left {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        border-right: 10px solid var(--ig-border-2);
+
+        .logo {
+            position: absolute;
+            top: 5%;
+            left: 5%;
+            width: 15%;
+
+            img {
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        .center {
+            margin-top: var(--ig-spacing-6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: var(--ig-spacing-4);
+            text-align: center;
+            font-weight: var(--ig-font-weight-bold);
+            font-size: var(--ig-font-size-xl);
+
+            .pic {
+                width: 50%;
+
+                img {
+                    height: 100%;
+                    width: 100%;
+                }
+            }
+
+            .up {
+                margin-bottom: var(--ig-spacing-4);
+            }
+
+            .down {
+                background: var(--insta-gradient);
+                background-clip: text;
+                color: transparent;
+            }
+        }
+    }
+
+    .right, .right form{
+        background-color: var(--ig-background-four);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: var(--ig-spacing-4);
+    }
+
+    .right form{
+        width: 80%;
+
+        .or{
+            margin: -0.5rem;
+        }
+
+        input{
+            width: 100%;
+            padding: var(--ig-spacing-3);
+            border-radius: var(--ig-radius-lg);
+            outline: none;
+            border: 1px solid var(--ig-border-2);
+            background: transparent;
+
+            color: var(--ig-text-secondary);
+
+            &:focus{
+                border: 2px solid var(--ig-border-3);
+            }
+        }
+
+        .submit{
+            background-color: var(--ig-blue-60);
+            border: none;
+            outline: none;
+            border-radius: var(--ig-radius-pill);
+            cursor: pointer;
+            font-size: var(--ig-font-size-md);
+            font-weight: var(--ig-font-weight-medium);
+            color: var(--ig-text-primary);
+
+            &:hover{
+                background-color: var(--ig-blue-70);
+            }
+        }
+    }
+
+    a{
+        color: var(--ig-blue-60);
+        text-decoration: none;
+    }
+}
