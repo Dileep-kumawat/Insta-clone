@@ -1,9 +1,13 @@
 import { useState } from "react"
 import axios from 'axios'
 import '../styles/form.scss'
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 
 const Register = () => {
+
+    const { user, loading, handleRegister } = useAuth()
+
     const [form, setForm] = useState({
         username: "",
         email: "",
@@ -13,13 +17,13 @@ const Register = () => {
     async function formSubmitHandler(e) {
         e.preventDefault();
 
-        const res = await axios.post(import.meta.env.VITE_BACKEND_ENDPOINT + '/api/auth/register', {
-            username: form.username,
-            email: form.email,
-            password: form.password
-        }, { withCredentials: true });
+        await handleRegister(form.username, form.email, form.password);
 
-        console.log(res);
+        Navigate('/');
+    }
+
+    if (loading) {
+        return <h1>Loading.....</h1>
     }
 
     return (
