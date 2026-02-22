@@ -1,12 +1,13 @@
 import { useState } from "react"
 import axios from 'axios'
 import '../styles/form.scss'
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 const Register = () => {
 
-    const { user, loading, handleRegister } = useAuth()
+    const { user, loading, handleRegister } = useAuth();
+    const navigate = useNavigate();
 
     const [form, setForm] = useState({
         username: "",
@@ -19,7 +20,7 @@ const Register = () => {
 
         await handleRegister(form.username, form.email, form.password);
 
-        Navigate('/');
+        navigate('/');
     }
 
     if (loading) {

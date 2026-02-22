@@ -1,10 +1,11 @@
 import { useState } from "react"
 import '../styles/form.scss'
-import { Link, Navigate } from "react-router-dom"
-import { useAuth } from "../hooks/useAuth"
+import { Link, useNavigate } from "react-router-dom"
+import { useAuth } from "../hooks/useAuth.js"
 
 const Login = () => {
     const { user, loading, handleLogin } = useAuth();
+    const navigate = useNavigate();
 
     const [form, setForm] = useState({
         username: "",
@@ -17,7 +18,7 @@ const Login = () => {
 
         await handleLogin(form.username, form.email, form.password)
 
-        Navigate('/');
+        navigate('/');
     }
 
     if (loading) return <h1>Loading...</h1>
