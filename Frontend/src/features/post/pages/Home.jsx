@@ -11,13 +11,13 @@ const Home = () => {
 
     //----------------Reactive after development of posts usage
 
-    // const navigate = useNavigate();
-    // const { user } = useAuth();
-    // useEffect(() => {
-    //     if (!user) {
-    //         navigate('/login');
-    //     }
-    // }, [user, navigate]);
+    const navigate = useNavigate();
+    const { user } = useAuth();
+    useEffect(() => {
+        if (!user) {
+            navigate('/login');
+        }
+    }, [user, navigate]);
 
     return (
         <main className="home-container">

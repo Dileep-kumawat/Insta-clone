@@ -79,22 +79,23 @@ async function loginController(req, res) {
 
     res.status(200).json({
         "msg": "User login successfull - " + (user.email === email ? user.email : user.username),
-        user
+        user: {
+            username: user.username,
+            email: user.email,
+            bio: user.bio,
+            profileImage: user.profileImage,
+            _id: user._id
+        }
     });
 }
 
 async function getMeController(req, res) {
-    const user = await userModel.findById(req.user.id);
+    const user = await userModel.findById(req.user.id).lean();
 
     res.status(200).json({
         "msg": "The details of the user",
-        user: {
-            username: user.username,
-            email: user.email,
-            profileImage: user.profileImage,
-            bio: user.bio
-        }
-    })
+        user
+    });
 }
 
 module.exports = {

@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import "../styles/post.scss";
 import { toast, Bounce } from 'react-toastify'
 
-const Post = ({ post }) => {
+const Post = ({ post, isUserPost }) => {
 
     const [like, setLike] = useState(false);
 
@@ -62,7 +62,7 @@ const Post = ({ post }) => {
                     <h5><span>{post.user.username}</span> · {post.user.email}</h5>
                     <h6>{timeAgo()}</h6>
                 </div>
-                <button className="follow-btn">Follow</button>
+                {!isUserPost && <button className="follow-btn">Follow</button>}
             </div>
             <div className="image" onDoubleClick={likeHandler}>
                 {/* <img src={post.imgUrl} alt="post image" /> */}

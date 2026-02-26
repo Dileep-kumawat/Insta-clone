@@ -149,10 +149,60 @@ async function rejectFollowRequestController(req, res) {
     });
 }
 
+async function getNoOffollowersController(req, res) {
+    const user = req.user.id;
+
+    let followersRecord = null;
+    try {
+        followersRecord = await followModel.countDocuments({ following: user });
+    } catch (error) {
+        return res.status(400).json({
+            "msg": "Invalid id of the user"
+        });
+    }
+
+    if (!followersRecord) {
+        return res.status(404).json({
+            msg: "No pending follow request found"
+        });
+    }
+
+    res.status(200).json({
+        "msg": "Follow request rejected successfully",
+        followersRecord
+    });
+}
+
+async function getNoOfFollowingsController(req, res) {
+    const user = req.user.id;
+
+    let followingsRecord = null;
+    try {
+        followingsRecord = await followModel.countDocuments({ follower: user });
+    } catch (error) {
+        return res.status(400).json({
+            "msg": "Invalid id of the user"
+        });
+    }
+
+    if (!followingsRecord) {
+        return res.status(404).json({
+            msg: "No pending follow request found"
+        });
+    }
+
+    res.status(200).json({
+        "msg": "Follow request rejected successfully",
+        followingsRecord
+    });
+}
+
 module.exports = {
     followController,
     unFollowController,
     getPendingFollowersController,
     acceptFollowRequestController,
-    rejectFollowRequestController
+    rejectFollowRequestController,
+    getNoOffollowersController,
+    getNoOfFollowingsController
 }
