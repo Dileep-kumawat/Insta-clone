@@ -1,12 +1,12 @@
-section.profile-container{
+section.profile-container {
     display: grid;
     grid-template-columns: 20% 1fr;
     gap: 1rem;
     padding: 1rem;
     height: 100%;
     width: 100%;
-    
-    .profile-section{
+
+    .profile-section {
         height: 100%;
         overflow: auto;
         padding: 1rem;
@@ -16,40 +16,40 @@ section.profile-container{
         align-items: center;
         gap: 2rem;
         flex-direction: column;
+        position: relative;
 
-        .top{
+        .top {
             display: flex;
             gap: 1rem;
             align-items: center;
 
-            .image{
+            .image {
                 width: 20%;
                 aspect-ratio: 1/1;
                 border-radius: 50%;
                 overflow: hidden;
-                padding: 10px;
 
-                img{
+                img {
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
                 }
             }
 
-            .text{
+            .text {
                 display: flex;
                 flex-direction: column;
                 gap: .5rem;
 
-                h1{
+                h1 {
                     text-transform: capitalize;
                 }
 
-                h2{
+                h2 {
                     color: var(--ig-white-alpha-60);
                 }
 
-                .stats{
+                .stats {
                     display: flex;
                     align-items: center;
                     gap: 1rem;
@@ -57,9 +57,23 @@ section.profile-container{
             }
         }
 
-        .bottom{
+        .bottom {
             display: grid;
-            grid-template-columns: repeat(2,1fr);
+            grid-template-columns: repeat(2, 1fr);
+
+            .no-posts {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                i {
+                    font-size: 5rem;
+                }
+            }
         }
     }
 }

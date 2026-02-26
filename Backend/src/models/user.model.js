@@ -14,14 +14,14 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, "Password must be provided"],
-        select : false
+        select: false
     },
     bio: {
         type: String,
     },
     profileImage: {
         type: String,
-        default: "https://ik.imagekit.io/4fk4evlju/avatar-default-user-profile-icon-soci…"
+        default: "https://ik.imagekit.io/4fk4evlju/Insta%20clone/default-avatar.webp"
     }
 });
 

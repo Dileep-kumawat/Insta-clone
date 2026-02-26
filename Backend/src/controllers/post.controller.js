@@ -36,7 +36,7 @@ async function postCreateController(req, res) {
 async function getPostsController(req, res) {
     const posts = await postModel.find({
         user: req.user.id
-    }).lean();
+    }).populate("user").lean();
 
     res.status(200).json({
         posts

@@ -1,10 +1,15 @@
 import { useMemo, useState } from "react";
 import "../styles/post.scss";
 import { toast, Bounce } from 'react-toastify'
+import { useAuth } from "../../auth/hooks/useAuth";
 
-const Post = ({ post, isUserPost }) => {
+const Post = ({ post }) => {
 
     const [like, setLike] = useState(false);
+    const { user } = useAuth();
+
+    console.log(user);
+    console.log(post);
 
     const random = useMemo(() => {
         let rand = Math.floor(Math.random() * 200) - 100;
@@ -55,18 +60,18 @@ const Post = ({ post, isUserPost }) => {
 
             <div className="upper">
                 <div className="profile-pic">
-                    {/* <img src={post.user.profileImage} alt="profile image of user" /> */}
-                    <img src="https://imgs.search.brave.com/7AMIaL_UPcGsCTN2e22JEyBdAiVERytzLJUomPNJpo0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5nYXJ0cy5jb20v/ZmlsZXMvMTAvRGVm/YXVsdC1Qcm9maWxl/LVBpY3R1cmUtUE5H/LUltYWdlLUJhY2tn/cm91bmQucG5n" alt="example pic of user" />
+                    <img src={post.user.profileImage} alt="profile image of user" />
+                    {/* <img src="https://imgs.search.brave.com/7AMIaL_UPcGsCTN2e22JEyBdAiVERytzLJUomPNJpo0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5nYXJ0cy5jb20v/ZmlsZXMvMTAvRGVm/YXVsdC1Qcm9maWxl/LVBpY3R1cmUtUE5H/LUltYWdlLUJhY2tn/cm91bmQucG5n" alt="example pic of user" /> */}
                 </div>
                 <div className="user-details">
                     <h5><span>{post.user.username}</span> · {post.user.email}</h5>
                     <h6>{timeAgo()}</h6>
                 </div>
-                {!isUserPost && <button className="follow-btn">Follow</button>}
+                {!(user._id.toString() === post.user._id.toString()) && <button className="follow-btn">Follow</button>}
             </div>
             <div className="image" onDoubleClick={likeHandler}>
-                {/* <img src={post.imgUrl} alt="post image" /> */}
-                <img src="https://imgs.search.brave.com/A9OSl001FzM_oAJBThNLx_Utev5fzeVyd1Qso5s7bUw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNDYv/NzQ3LzQ2OC9zbWFs/bC9sb25lbHktYmVh/dXRpZnVsLXRyZWUt/b24tdGhlLXRvcC1y/b2NrLWhpbGwtbW91/bnRhaW4tYXQtc3Vu/c2V0LW5hdHVyZS1v/dXRkb29yLXNjZW5l/LXZpZXctcGhvdG8u/anBn" alt="post image" />
+                <img src={post.imgUrl} alt="post image" />
+                {/* <img src="https://imgs.search.brave.com/A9OSl001FzM_oAJBThNLx_Utev5fzeVyd1Qso5s7bUw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wNDYv/NzQ3LzQ2OC9zbWFs/bC9sb25lbHktYmVh/dXRpZnVsLXRyZWUt/b24tdGhlLXRvcC1y/b2NrLWhpbGwtbW91/bnRhaW4tYXQtc3Vu/c2V0LW5hdHVyZS1v/dXRkb29yLXNjZW5l/LXZpZXctcGhvdG8u/anBn" alt="post image" /> */}
 
                 {like && (
                     <div style={{ "--rot": random }} className="open like-feature">

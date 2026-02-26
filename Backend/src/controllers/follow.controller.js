@@ -161,12 +161,6 @@ async function getNoOffollowersController(req, res) {
         });
     }
 
-    if (!followersRecord) {
-        return res.status(404).json({
-            msg: "No pending follow request found"
-        });
-    }
-
     res.status(200).json({
         "msg": "Follow request rejected successfully",
         followersRecord
@@ -182,12 +176,6 @@ async function getNoOfFollowingsController(req, res) {
     } catch (error) {
         return res.status(400).json({
             "msg": "Invalid id of the user"
-        });
-    }
-
-    if (!followingsRecord) {
-        return res.status(404).json({
-            msg: "No pending follow request found"
         });
     }
 
