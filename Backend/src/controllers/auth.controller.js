@@ -54,7 +54,7 @@ async function loginController(req, res) {
             { username },
             { email }
         ]
-    });
+    }).select('+password');
 
     if (!user) {
         return res.status(404).json({
@@ -78,7 +78,8 @@ async function loginController(req, res) {
     res.cookie("token", token);
 
     res.status(200).json({
-        "msg": "User login successfull - " + (user.email === email ? user.email : user.username)
+        "msg": "User login successfull - " + (user.email === email ? user.email : user.username),
+        user
     });
 }
 

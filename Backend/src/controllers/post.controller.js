@@ -12,7 +12,7 @@ async function postCreateController(req, res) {
     const file = await client.files.upload({
         file: await toFile(Buffer.from(req.file.buffer), 'file'),
         fileName: req.file.originalname,
-        folder: "garbage"
+        folder: "instaClone"
     });
 
     const post = await postModel.create({
@@ -37,6 +37,14 @@ async function getPostsController(req, res) {
     const posts = await postModel.find({
         user: req.user.id
     });
+
+    res.status(200).json({
+        posts
+    });
+}
+
+async function getAllPostsController(req, res) {
+    const posts = await postModel.find().populate("user");
 
     res.status(200).json({
         posts
@@ -68,5 +76,6 @@ async function getPostDetailsController(req, res) {
 module.exports = {
     postCreateController,
     getPostsController,
-    getPostDetailsController
+    getPostDetailsController,
+    getAllPostsController
 }

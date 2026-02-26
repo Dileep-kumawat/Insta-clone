@@ -24,7 +24,7 @@ const Login = () => {
     if (loading) return <h1>Loading...</h1>
 
     return (
-        <main>
+        <main className="form-container">
             <div className="left">
                 <div className="logo">
                     <img src="primary-logo.png" alt="primary log" />

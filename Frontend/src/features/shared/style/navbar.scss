@@ -1,0 +1,56 @@
+nav.nav-container {
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .logo {
+        img {
+            width: 25%;
+        }
+    }
+
+    .link {
+        color: white;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: .8rem;
+        font-size: 1.3rem;
+        font-weight: 600;
+        cursor: pointer;
+        padding: .5rem 1rem;
+        border-radius: 10px;
+
+        &.active{
+            color: var(--ig-blue-40);
+        }
+
+        i{
+            font-size: 1.2rem;
+        }
+
+        &#logout{
+            margin-top: auto;
+            color: var(--ig-red-error);
+        }
+        
+        &:hover i{
+            animation: icon .1s ease-in-out 1 forwards;
+        }
+
+        &:hover{
+            background-color: #96969638;
+        }
+
+        @keyframes icon {
+            from{
+                transform: translate(0%,0%);
+            }
+            to{
+                transform: translate(-10%,-10%);
+            }
+        }
+    }
+}

@@ -1,4 +1,4 @@
-main {
+main.form-container {
     height: 100%;
     width: 100%;
     background-color: var(--ig-background-secondary);
@@ -63,7 +63,8 @@ main {
         }
     }
 
-    .right, .right form{
+    .right,
+    .right form {
         background-color: var(--ig-background-four);
         display: flex;
         justify-content: center;
@@ -72,14 +73,14 @@ main {
         gap: var(--ig-spacing-4);
     }
 
-    .right form{
+    .right form {
         width: 80%;
 
-        .or{
+        .or {
             margin: -0.5rem;
         }
 
-        input{
+        input {
             width: 100%;
             padding: var(--ig-spacing-3);
             border-radius: var(--ig-radius-lg);
@@ -89,12 +90,12 @@ main {
 
             color: var(--ig-text-secondary);
 
-            &:focus{
+            &:focus {
                 border: 2px solid var(--ig-border-3);
             }
         }
 
-        .submit{
+        .submit {
             background-color: var(--ig-blue-60);
             border: none;
             outline: none;
@@ -104,14 +105,25 @@ main {
             font-weight: var(--ig-font-weight-medium);
             color: var(--ig-text-primary);
 
-            &:hover{
+            &:hover {
                 background-color: var(--ig-blue-70);
             }
         }
     }
 
-    a{
+    a {
         color: var(--ig-blue-60);
         text-decoration: none;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    main.form-container{
+        .left{
+            display: none;
+        }
+        .right{
+            width: 100%;
+        }
     }
 }

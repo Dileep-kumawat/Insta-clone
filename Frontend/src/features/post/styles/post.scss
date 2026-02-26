@@ -1,0 +1,149 @@
+.post {
+    width: 90%;
+    border: 1px solid gray;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding: .5rem;
+
+    .upper {
+        width: 100%;
+        padding: 0.5rem;
+        display: flex;
+        gap: .5rem;
+        align-items: center;
+        justify-content: space-between;
+
+        .profile-pic {
+            width: 10%;
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            padding: 5px;
+            background-color: var(--ig-blue-60);
+            cursor: pointer;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .user-details {
+            margin-right: auto;
+            margin-bottom: 5px;
+            cursor: pointer;
+
+            h5 span {
+                text-transform: capitalize;
+            }
+
+            h6 {
+                margin-top: .3rem;
+                color: var(--ig-white-alpha-40);
+            }
+        }
+
+        .follow-btn {
+            padding: .5rem 1rem;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            color: var(--ig-blue-60);
+            background: transparent;
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+    }
+
+    .image {
+        position: relative;
+        width: 100%;
+        cursor: pointer;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .like-feature {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            font-size: 5rem;
+            pointer-events: none;
+        }
+
+        .heart {
+            background: linear-gradient(45deg,
+                    #feda75,
+                    #fa7e1e,
+                    #d62976,
+                    #962fbf,
+                    #4f5bd5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .open {
+            animation: like .5s ease-in-out forwards,
+                goup .4s ease-in-out .8s;
+        }
+
+        @keyframes like {
+            0% {
+                scale: 0;
+                top: 50%;
+                opacity: 0;
+                rotate: var(--rot);
+            }
+
+            100% {
+                scale: 1;
+                opacity: 1;
+                rotate: 0;
+            }
+        }
+
+        @keyframes goup {
+            0% {
+                top: 50%;
+            }
+
+            100% {
+                top: -100%;
+            }
+        }
+    }
+
+    .icons {
+        display: flex;
+        width: 100%;
+        gap: 1rem;
+        padding: 0 .5rem;
+
+        i {
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        #bookmark-icon {
+            margin-left: auto;
+        }
+    }
+
+    .bottom {
+        padding: 0 .5rem;
+        margin-bottom: 10px;
+
+        .more-btn {
+            cursor: pointer;
+            font-weight: bold;
+        }
+    }
+}

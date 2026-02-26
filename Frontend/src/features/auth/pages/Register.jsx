@@ -1,8 +1,7 @@
-import { useState } from "react"
-import axios from 'axios'
-import '../styles/form.scss'
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import '../styles/form.scss';
 
 const Register = () => {
 
@@ -28,7 +27,7 @@ const Register = () => {
     }
 
     return (
-        <main>
+        <main className="form-container">
             <div className="left">
                 <div className="logo">
                     <img src="primary-logo.png" alt="primary log" />
