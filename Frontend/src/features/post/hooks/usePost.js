@@ -22,7 +22,7 @@ export function usePost() {
     async function handleGetALLSavedPosts() {
         setLoading(true);
         const res = await getAllSavedPosts();
-        setSavedPosts(res.savedPosts);
+        setSavedPosts(res.savedPosts.reverse());
         setLoading(false);
     }
 
