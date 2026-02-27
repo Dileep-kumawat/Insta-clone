@@ -36,5 +36,9 @@ export function useAuth() {
         setLoading(false);
     }
 
-    return { user, loading, handleGetMe, handleLogin, handleRegister }
+    async function handleLogout() {
+        setUser(null);
+    }
+
+    return { user, loading, handleGetMe, handleLogin, handleRegister, handleLogout }
 }

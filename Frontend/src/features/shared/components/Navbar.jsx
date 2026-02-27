@@ -1,7 +1,19 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "../style/navbar.scss";
+import { useAuth } from "../../auth/hooks/useAuth";
 
 const Navbar = () => {
+
+  const { handleLogout } = useAuth();
+
+  const navigate = useNavigate();
+
+  const logout = () => {
+    handleLogout();
+
+    navigate("/login");
+  }
+
   const navLinkHandler = (e) => "link " + (e.isActive ? "active" : "");
 
   return (
@@ -25,7 +37,9 @@ const Navbar = () => {
         <i className="ri-user-3-fill"></i>
         <span>Profile</span>
       </NavLink>
-      <div id="logout" className="link">
+      <div
+        onClick={logout}
+        id="logout" className="link">
         <i className="ri-logout-box-line"></i>
         <span>Logout</span>
       </div>
