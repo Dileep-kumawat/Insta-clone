@@ -1,5 +1,6 @@
 const postModel = require("../models/post.model");
 const savedModel = require("../models/saved.model");
+const likeModel = require("../models/like.model");
 
 async function saveController(req, res) {
     const post = req.params.id;
@@ -77,14 +78,21 @@ async function getSavedController(req, res) {
                     post: e.post._id,
                     user: req.user.id
                 });
+                
+                const liked = await likeModel.findOne({
+                    post: e.post._id,
+                    user: req.user.id
+                });
 
                 e.post = {
                     ...e.post,
-                    isSavedPost: !!saved
+                    isSavedPost: !!saved,
+                    isLiked: !!liked
                 }
                 return e;
             })
         );
+
     } catch (error) {
         return res.status(400).json({
             "msg": "Something went wrong"

@@ -1,6 +1,7 @@
 const ImageKit = require('@imagekit/nodejs');
 const { toFile } = require('@imagekit/nodejs');
 const postModel = require("../models/post.model");
+const likeModel = require("../models/like.model");
 const savedModel = require('../models/saved.model');
 
 async function postCreateController(req, res) {
@@ -46,9 +47,15 @@ async function getPostsController(req, res) {
                 user: req.user.id
             });
 
+            const liked = await likeModel.findOne({
+                post: post._id,
+                user: req.user.id
+            });
+
             return {
                 ...post,
-                isSavedPost: !!saved
+                isSavedPost: !!saved,
+                isLiked: !!liked
             };
         })
     );
@@ -68,9 +75,15 @@ async function getAllPostsController(req, res) {
                 user: req.user.id
             });
 
+            const liked = await likeModel.findOne({
+                post: post._id,
+                user: req.user.id
+            });
+
             return {
                 ...post,
-                isSavedPost: !!saved
+                isSavedPost: !!saved,
+                isLiked: !!liked
             };
         })
     );
