@@ -3,10 +3,12 @@ const mongoose = require("mongoose");
 const savedSchema = mongoose.Schema({
     post: {
         type: mongoose.Schema.Types.ObjectId,
+        ref: "post",
         required: [true, "postId must be provided"]
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
+        ref: "user",
         required: [true, "postId must be provided"]
     },
 }, {

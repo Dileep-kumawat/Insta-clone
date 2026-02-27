@@ -25,6 +25,16 @@ export async function getAllPosts() {
     }
 }
 
+export async function getAllSavedPosts() {
+    try {
+        const res = await api.get("/api/saves");
+
+        return res.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export async function createPost(file, caption) {
     try {
         const formData = new FormData();

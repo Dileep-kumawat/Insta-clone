@@ -1,15 +1,12 @@
 import { useMemo, useState } from "react";
 import "../styles/post.scss";
-import { toast, Bounce } from 'react-toastify'
+import { toast } from 'react-toastify'
 import { useAuth } from "../../auth/hooks/useAuth";
 
 const Post = ({ post }) => {
 
     const [like, setLike] = useState(false);
     const { user } = useAuth();
-
-    console.log(user);
-    console.log(post);
 
     const random = useMemo(() => {
         let rand = Math.floor(Math.random() * 200) - 100;
@@ -54,7 +51,6 @@ const Post = ({ post }) => {
         return "Created just now";
     };
 
-    console.log(post);
     return (
         <div className="post">
 
@@ -89,7 +85,11 @@ const Post = ({ post }) => {
                 <i
                     onClick={() => { toast("This section is in under construction, so this will be added in the next version") }}
                     className="ri-share-forward-fill"></i>
-                <i id="bookmark-icon" className="ri-bookmark-line"></i>
+                {
+                    post.isSavedPost ?
+                        <i id="bookmark-icon" className="ri-bookmark-fill"></i>
+                        : <i id="bookmark-icon" className="ri-bookmark-line"></i>
+                }
             </div>
             <div className="bottom">
                 <p>

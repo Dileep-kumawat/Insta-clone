@@ -1,8 +1,14 @@
 const express = require("express");
 const authMidlleware = require("../middlewares/auth.middleware");
-const { saveController, unSaveController } = require("../controllers/saved.controller.js");
+const { saveController, unSaveController,getSavedController } = require("../controllers/saved.controller.js");
 
 const savedRouter = express.Router();
+
+/**
+ * @route GET /api/saves/
+ * @description Get all Saved post of the user
+ */
+savedRouter.get("/", authMidlleware, getSavedController);
 
 /**
  * @route POST /api/saves/save/:id
