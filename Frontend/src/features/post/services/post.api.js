@@ -47,3 +47,23 @@ export async function createPost(file, caption) {
         console.log(error);
     }
 }
+
+export async function savePost(id) {
+    try {
+        const res = await api.post("/api/saves/save/" + id);
+
+        return res.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function unsavePost(id) {
+    try {
+        const res = await api.delete("/api/saves/unsave/" + id);
+
+        return res.data;
+    } catch (error) {
+        console.log(error);
+    }
+}

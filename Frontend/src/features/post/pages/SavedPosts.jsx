@@ -19,7 +19,7 @@ const SavedPosts = () => {
                     savedPosts.length <= 0 ?
                         "No Post saved Yet!" :
                         savedPosts.map((e) => {
-                            return <Post post={e.post} />
+                            return <Post key={e?._id} post={e.post} />
                         })
                 }
             </section>
