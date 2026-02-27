@@ -67,3 +67,23 @@ export async function unsavePost(id) {
         console.log(error);
     }
 }
+
+export async function likePost(id) {
+    try {
+        const res = await api.post("/api/likes/like/" + id);
+
+        return res.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export async function unlikePost(id) {
+    try {
+        const res = await api.delete("/api/likes/unlike/" + id);
+
+        return res.data;
+    } catch (error) {
+        console.log(error);
+    }
+}

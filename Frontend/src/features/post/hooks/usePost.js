@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { PostContext } from "../post.context";
-import { getPosts, getAllPosts, createPost, getAllSavedPosts, savePost, unsavePost } from "../services/post.api";
+import { getPosts, getAllPosts, createPost, getAllSavedPosts, savePost, unsavePost, likePost, unlikePost } from "../services/post.api";
 
 export function usePost() {
     const { loading, setLoading, posts, setPosts, userPosts, setUserPosts, savedPosts, setSavedPosts } = useContext(PostContext);
@@ -42,5 +42,15 @@ export function usePost() {
         return res;
     }
 
-    return { loading, handleGetAllPosts, posts, handleGetPosts, userPosts, handleCreatePost, handleGetALLSavedPosts, savedPosts, handleSavePost, handleUnSavePost };
+    async function handleLikePost(id) {
+        const res = await likePost(id);
+        return res;
+    }
+
+    async function handleUnLikePost(id) {
+        const res = await unlikePost(id);
+        return res;
+    }
+
+    return { loading, handleGetAllPosts, posts, handleGetPosts, userPosts, handleCreatePost, handleGetALLSavedPosts, savedPosts, handleSavePost, handleUnSavePost, handleLikePost, handleUnLikePost };
 }

@@ -7,13 +7,15 @@ import { usePost } from "../hooks/usePost";
 const Post = ({ post }) => {
 
     const [like, setLike] = useState(false);
+    const [likeAnimate, setLikeAnimate] = useState(false);
     const [saved, setSaved] = useState(false);
     const { user } = useAuth();
-    const { handleSavePost, handleUnSavePost } = usePost();
+    const { handleSavePost, handleUnSavePost, handleLikePost, handleUnLikePost } = usePost();
 
     useEffect(() => {
         setSaved(post.isSavedPost);
-    }, [post.isSavedPost]);
+        setLike(post.isLiked);
+    }, [post.isSavedPost, post.isLiked]);
 
     async function savePostHandler() {
         await handleSavePost(post._id);
@@ -25,15 +27,27 @@ const Post = ({ post }) => {
         setSaved(false);
     }
 
+    async function likePostHandler() {
+        await handleLikePost(post._id);
+        setLike(true);
+    }
+
+    async function UnLikePostHandler() {
+        await handleUnLikePost(post._id);
+        setLike(false);
+    }
+
     const random = useMemo(() => {
         let rand = Math.floor(Math.random() * 200) - 100;
         return `${rand}deg`;
     }, []);
 
     function likeHandler() {
-        setLike(true)
+        setLikeAnimate(true);
 
-        setTimeout(() => setLike(false), 1000)
+        setTimeout(() => setLikeAnimate(false), 1000);
+
+        if (!like) likePostHandler();
     }
 
     const [isExpanded, setIsExpanded] = useState(false);
@@ -88,14 +102,22 @@ const Post = ({ post }) => {
             <div className="image" onDoubleClick={likeHandler}>
                 <img src={post.imgUrl} alt="post image" />
 
-                {like && (
+                {likeAnimate && (
                     <div style={{ "--rot": random }} className="open like-feature">
                         <i className="heart ri-heart-fill"></i>
                     </div>
                 )}
             </div>
             <div className="icons">
-                <i className="ri-heart-line"></i>
+                {
+                    like ?
+                        <i
+                            onClick={UnLikePostHandler}
+                            id="like" className="ri-heart-fill"></i> :
+                        <i
+                            onClick={likePostHandler}
+                            id="like" className="ri-heart-line"></i>
+                }
                 <i
                     onClick={() => {
                         toast("This section is in under construction, so this will be added in the next version")
