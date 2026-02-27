@@ -20,7 +20,7 @@ postRouter.get("/", authMiddleware, getPostsController);
 /**
  * GET api/post/all
  */
-postRouter.get("/all", getAllPostsController);
+postRouter.get("/all",authMiddleware, getAllPostsController);
 
 /**
  * GET api/post/details/:id

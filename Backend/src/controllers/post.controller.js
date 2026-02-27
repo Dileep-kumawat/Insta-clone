@@ -1,6 +1,7 @@
 const ImageKit = require('@imagekit/nodejs');
 const { toFile } = require('@imagekit/nodejs');
 const postModel = require("../models/post.model");
+const savedModel = require('../models/saved.model');
 
 async function postCreateController(req, res) {
     const { caption } = req.body;
@@ -38,16 +39,44 @@ async function getPostsController(req, res) {
         user: req.user.id
     }).populate("user").lean();
 
+    const updatedPosts = await Promise.all(
+        posts.map(async (post) => {
+            const saved = await savedModel.findOne({
+                post: post._id,
+                user: req.user.id
+            });
+
+            return {
+                ...post,
+                isSavedPost: !!saved
+            };
+        })
+    );
+
     res.status(200).json({
-        posts
+        posts: updatedPosts
     });
 }
 
 async function getAllPostsController(req, res) {
-    const posts = await postModel.find().populate("user");
+    const posts = await postModel.find().populate("user").lean();
+
+    const updatedPosts = await Promise.all(
+        posts.map(async (post) => {
+            const saved = await savedModel.findOne({
+                post: post._id,
+                user: req.user.id
+            });
+
+            return {
+                ...post,
+                isSavedPost: !!saved
+            };
+        })
+    );
 
     res.status(200).json({
-        posts
+        posts: updatedPosts
     });
 }
 
