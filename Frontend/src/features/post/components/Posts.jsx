@@ -8,7 +8,6 @@ import { Bounce, ToastContainer } from 'react-toastify';
 const Posts = () => {
   const { handleGetAllPosts, posts, loading } = usePost();
 
-
   useEffect(() => {
     handleGetAllPosts();
   }, []);

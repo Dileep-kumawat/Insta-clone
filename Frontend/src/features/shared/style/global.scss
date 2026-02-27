@@ -3,24 +3,51 @@
    ========================= */
 
 * {
-   margin: 0;
-   padding: 0;
-   box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html,
 body,
 #root {
-   height: 100%;
-   width: 100%;
+    height: 100%;
+    width: 100%;
 }
 
 body {
-   background-color: #0C1014;
-   color: rgb(238, 238, 238);
-   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-      Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
-      'Helvetica Neue', sans-serif;
+    background-color: #0C1014;
+    color: rgb(238, 238, 238);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+        Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+        'Helvetica Neue', sans-serif;
+}
+
+/* =========================
+   CUSTOM SCROLLBAR
+   ========================= */
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #111;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #2a2a2a;
+    border-radius: 8px;
+    border: 2px solid #111;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #3d3d3d;
 }
 
 
@@ -30,156 +57,156 @@ body {
 
 :root {
 
-   /* =========================
+    /* =========================
        1. CORE COLOR TOKENS
        ========================= */
 
-   --ig-black: #000000;
-   --ig-black-alpha-05: rgba(0, 0, 0, 0.05);
-   --ig-black-alpha-10: rgba(0, 0, 0, 0.1);
-   --ig-black-alpha-20: rgba(0, 0, 0, 0.2);
-   --ig-black-alpha-40: rgba(0, 0, 0, 0.4);
-   --ig-black-alpha-60: rgba(0, 0, 0, 0.6);
-   --ig-black-alpha-80: rgba(0, 0, 0, 0.8);
+    --ig-black: #000000;
+    --ig-black-alpha-05: rgba(0, 0, 0, 0.05);
+    --ig-black-alpha-10: rgba(0, 0, 0, 0.1);
+    --ig-black-alpha-20: rgba(0, 0, 0, 0.2);
+    --ig-black-alpha-40: rgba(0, 0, 0, 0.4);
+    --ig-black-alpha-60: rgba(0, 0, 0, 0.6);
+    --ig-black-alpha-80: rgba(0, 0, 0, 0.8);
 
-   --ig-white: #ffffff;
-   --ig-white-alpha-10: rgba(255, 255, 255, 0.1);
-   --ig-white-alpha-20: rgba(255, 255, 255, 0.2);
-   --ig-white-alpha-40: rgba(255, 255, 255, 0.4);
-   --ig-white-alpha-60: rgba(255, 255, 255, 0.6);
+    --ig-white: #ffffff;
+    --ig-white-alpha-10: rgba(255, 255, 255, 0.1);
+    --ig-white-alpha-20: rgba(255, 255, 255, 0.2);
+    --ig-white-alpha-40: rgba(255, 255, 255, 0.4);
+    --ig-white-alpha-60: rgba(255, 255, 255, 0.6);
 
-   --ig-blue-40: #4c8bf5;
-   --ig-blue-60: #1877f2;
-   --ig-blue-70: #2851a3;
-   --ig-blue-80: #1d3c78;
+    --ig-blue-40: #4c8bf5;
+    --ig-blue-60: #1877f2;
+    --ig-blue-70: #2851a3;
+    --ig-blue-80: #1d3c78;
 
-   --ig-red-error: #ed4956;
-   --ig-green-success: #2ecc71;
-   --ig-yellow-warning: #f7b928;
+    --ig-red-error: #ed4956;
+    --ig-green-success: #2ecc71;
+    --ig-yellow-warning: #f7b928;
 
 
-   /* =========================
+    /* =========================
        2. SEMANTIC UI TOKENS
        ========================= */
 
-   --ig-text-primary: var(--ig-black);
-   --ig-text-secondary: var(--ig-black-alpha-60);
-   --ig-text-disabled: var(--ig-black-alpha-40);
+    --ig-text-primary: var(--ig-black);
+    --ig-text-secondary: var(--ig-black-alpha-60);
+    --ig-text-disabled: var(--ig-black-alpha-40);
 
-   --ig-background-primary: var(--ig-white);
-   --ig-background-secondary: #fafafa;
-   --ig-background-elevated: var(--ig-white);
+    --ig-background-primary: var(--ig-white);
+    --ig-background-secondary: #fafafa;
+    --ig-background-elevated: var(--ig-white);
 
-   --ig-border: #dbdbdb;
-   /* Keep 1px borders in px */
-   --ig-divider: var(--ig-black-alpha-10);
+    --ig-border: #dbdbdb;
+    /* Keep 1px borders in px */
+    --ig-divider: var(--ig-black-alpha-10);
 
-   --ig-link: var(--ig-blue-60);
-   --ig-error: var(--ig-red-error);
+    --ig-link: var(--ig-blue-60);
+    --ig-error: var(--ig-red-error);
 
 
-   /* =========================
+    /* =========================
        3. TYPOGRAPHY 
        ========================= */
 
-   --ig-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-      Roboto, Helvetica, Arial, sans-serif;
+    --ig-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
 
-   --ig-font-size-xs: 0.75rem;
-   /* 12px */
-   --ig-font-size-sm: 0.875rem;
-   /* 14px */
-   --ig-font-size-md: 1rem;
-   /* 16px */
-   --ig-font-size-lg: 1.25rem;
-   /* 20px */
-   --ig-font-size-xl: 2rem;
-   /* 32px */
+    --ig-font-size-xs: 0.75rem;
+    /* 12px */
+    --ig-font-size-sm: 0.875rem;
+    /* 14px */
+    --ig-font-size-md: 1rem;
+    /* 16px */
+    --ig-font-size-lg: 1.25rem;
+    /* 20px */
+    --ig-font-size-xl: 2rem;
+    /* 32px */
 
-   --ig-font-weight-regular: 400;
-   --ig-font-weight-medium: 500;
-   --ig-font-weight-bold: 600;
+    --ig-font-weight-regular: 400;
+    --ig-font-weight-medium: 500;
+    --ig-font-weight-bold: 600;
 
 
-   /* =========================
+    /* =========================
        4. SPACING SYSTEM 
        ========================= */
 
-   --ig-spacing-1: 0.25rem;
-   /* 4px */
-   --ig-spacing-2: 0.5rem;
-   /* 8px */
-   --ig-spacing-3: 0.75rem;
-   /* 12px */
-   --ig-spacing-4: 1rem;
-   /* 16px */
-   --ig-spacing-5: 1.5rem;
-   /* 24px */
-   --ig-spacing-6: 2rem;
-   /* 32px */
+    --ig-spacing-1: 0.25rem;
+    /* 4px */
+    --ig-spacing-2: 0.5rem;
+    /* 8px */
+    --ig-spacing-3: 0.75rem;
+    /* 12px */
+    --ig-spacing-4: 1rem;
+    /* 16px */
+    --ig-spacing-5: 1.5rem;
+    /* 24px */
+    --ig-spacing-6: 2rem;
+    /* 32px */
 
 
-   /* =========================
+    /* =========================
        5. BORDER RADIUS 
        ========================= */
 
-   --ig-radius-sm: 0.25rem;
-   /* 4px */
-   --ig-radius-md: 0.5rem;
-   /* 8px */
-   --ig-radius-lg: 0.75rem;
-   /* 12px */
-   --ig-radius-pill: 62.5rem;
-   /* 9999px */
+    --ig-radius-sm: 0.25rem;
+    /* 4px */
+    --ig-radius-md: 0.5rem;
+    /* 8px */
+    --ig-radius-lg: 0.75rem;
+    /* 12px */
+    --ig-radius-pill: 62.5rem;
+    /* 9999px */
 
 
-   /* =========================
+    /* =========================
        6. SHADOWS (PX KEPT)
        ========================= */
 
-   --ig-shadow-card: 0 1px 2px rgba(0, 0, 0, 0.1);
-   --ig-shadow-modal: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --ig-shadow-card: 0 1px 2px rgba(0, 0, 0, 0.1);
+    --ig-shadow-modal: 0 4px 12px rgba(0, 0, 0, 0.15);
 
 
-   /* =========================
+    /* =========================
        7. LAYOUT CONSTANTS 
        ========================= */
 
-   --ig-max-content-width: 29.375rem;
-   /* 470px */
-   --ig-sidebar-width: 15.25rem;
-   /* 244px */
-   --ig-navbar-height: 3.75rem;
-   /* 60px */
+    --ig-max-content-width: 29.375rem;
+    /* 470px */
+    --ig-sidebar-width: 15.25rem;
+    /* 244px */
+    --ig-navbar-height: 3.75rem;
+    /* 60px */
 
 
-   /* =========================
+    /* =========================
        8. INTERACTION STATES
        ========================= */
 
-   --ig-hover-overlay: rgba(0, 0, 0, 0.05);
-   --ig-active-overlay: rgba(0, 0, 0, 0.1);
-   --ig-focus-ring: 0 0 0 2px rgba(24, 119, 242, 0.4);
+    --ig-hover-overlay: rgba(0, 0, 0, 0.05);
+    --ig-active-overlay: rgba(0, 0, 0, 0.1);
+    --ig-focus-ring: 0 0 0 2px rgba(24, 119, 242, 0.4);
 
-   /* =========================
+    /* =========================
        9. Gradients
        ========================= */
 
-   --insta-gradient: linear-gradient(45deg,
-         #405DE6,
-         #5851DB,
-         #833AB4,
-         #C13584,
-         #E1306C,
-         #FD1D1D,
-         #F56040,
-         #F77737,
-         #FCAF45,
-         #FFDC80);
-   --insta-gradient-2: linear-gradient(135deg,
-         #833AB4,
-         #E1306C,
-         #F77737);
+    --insta-gradient: linear-gradient(45deg,
+            #405DE6,
+            #5851DB,
+            #833AB4,
+            #C13584,
+            #E1306C,
+            #FD1D1D,
+            #F56040,
+            #F77737,
+            #FCAF45,
+            #FFDC80);
+    --insta-gradient-2: linear-gradient(135deg,
+            #833AB4,
+            #E1306C,
+            #F77737);
 }
 
 
@@ -189,21 +216,21 @@ body {
 
 .__ig-dark-mode {
 
-   --ig-text-primary: var(--ig-white);
-   --ig-text-secondary: var(--ig-white-alpha-60);
-   --ig-text-disabled: var(--ig-white-alpha-40);
+    --ig-text-primary: var(--ig-white);
+    --ig-text-secondary: var(--ig-white-alpha-60);
+    --ig-text-disabled: var(--ig-white-alpha-40);
 
-   --ig-background-primary: #000000;
-   --ig-background-secondary: #0C1014;
-   --ig-background-third: #121212;
-   --ig-background-four: #152127;
-   --ig-background-elevated: #1e1e1e;
+    --ig-background-primary: #000000;
+    --ig-background-secondary: #0C1014;
+    --ig-background-third: #121212;
+    --ig-background-four: #152127;
+    --ig-background-elevated: #1e1e1e;
 
-   --ig-border: #262626;
-   --ig-border-2: #3D4F5C;
-   --ig-border-3: #3d5a6f;
-   --ig-divider: var(--ig-white-alpha-10);
+    --ig-border: #262626;
+    --ig-border-2: #3D4F5C;
+    --ig-border-3: #3d5a6f;
+    --ig-divider: var(--ig-white-alpha-10);
 
-   --ig-hover-overlay: rgba(255, 255, 255, 0.05);
-   --ig-active-overlay: rgba(255, 255, 255, 0.1);
+    --ig-hover-overlay: rgba(255, 255, 255, 0.05);
+    --ig-active-overlay: rgba(255, 255, 255, 0.1);
 }

@@ -8,7 +8,7 @@ export function usePost() {
     async function handleGetAllPosts() {
         setLoading(true);
         const res = await getAllPosts();
-        setPosts(res.posts);
+        setPosts(res.posts.reverse());
         setLoading(false);
     }
 

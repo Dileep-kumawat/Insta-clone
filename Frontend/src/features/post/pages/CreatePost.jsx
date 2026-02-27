@@ -28,7 +28,9 @@ const CreatePost = () => {
             <Navbar />
             {
                 loading ?
-                    <Loader /> :
+                    <div className="loader-container">
+                        <Loader />
+                    </div> :
                     <section className="create-section">
                         <h1>Create Post : </h1>
                         <form

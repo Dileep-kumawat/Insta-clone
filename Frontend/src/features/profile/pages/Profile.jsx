@@ -42,7 +42,7 @@ const Profile = () => {
                         <p>{user.bio}</p>
                     </div>
                 </div>
-                <div className="bottom">
+                <div className="bottom-container">
                     {userPosts.length <= 0 && <div className="no-posts">
                         <i className="ri-camera-4-line"></i>
                         <h4>No Posts Yet</h4>
