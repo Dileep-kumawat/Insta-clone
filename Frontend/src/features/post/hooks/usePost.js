@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { PostContext } from "../post.context";
-import { getPosts, getAllPosts } from "../services/post.api";
+import { getPosts, getAllPosts, createPost } from "../services/post.api";
 
 export function usePost() {
     const { loading, setLoading, posts, setPosts, userPosts, setUserPosts } = useContext(PostContext);
@@ -18,5 +18,11 @@ export function usePost() {
         setLoading(false);
     }
 
-    return { loading, handleGetAllPosts, posts, handleGetPosts, userPosts };
+    async function handleCreatePost(file, caption) {
+        setLoading(true);
+        await createPost(file, caption);
+        setLoading(false);
+    }
+
+    return { loading, handleGetAllPosts, posts, handleGetPosts, userPosts, handleCreatePost };
 }

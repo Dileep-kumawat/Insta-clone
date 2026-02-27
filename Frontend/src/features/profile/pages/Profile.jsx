@@ -17,8 +17,6 @@ const Profile = () => {
         handleGetNoOfFollowings();
     }, []);
 
-    console.log(user);
-    console.log(userPosts);
     return (
         <section className="profile-container">
             <Navbar />
@@ -26,7 +24,6 @@ const Profile = () => {
                 <div className="top">
                     <div className="image">
                         <img src={user.profileImage} alt="user profile pic" />
-                        {/* <img src="https://imgs.search.brave.com/lSA2C_DdTvls2mgbN2iM0rKKzu7q3xJ5BTB0Jpltq9g/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9wcmV2/aWV3LnJlZGQuaXQv/aW5zdGFncmFtLWRl/ZmF1bHQtdXNlci1w/cm9maWxlLXBpYy1m/bGlwLWZsb3BzLXYw/LWc5ODNvZmxmZWc0/ZDEuanBnP3dpZHRo/PTI2MiZmb3JtYXQ9/cGpwZyZhdXRvPXdl/YnAmcz1jNmVjMjMw/NTE5OWM2MzNmYzZk/NDYwMjM4ZDA0MDlm/NDE4MTJmZTc1" alt="" /> */}
                     </div>
                     <div className="text">
                         <h1>{user.username}</h1>

@@ -24,3 +24,16 @@ export async function getAllPosts() {
         console.log(error);
     }
 }
+
+export async function createPost(file, caption) {
+    try {
+        const formData = new FormData();
+        formData.append("imgUrl", file)
+        formData.append("caption", caption);
+        const res = await api.post("/api/post/", formData);
+
+        return res.data;
+    } catch (error) {
+        console.log(error);
+    }
+}

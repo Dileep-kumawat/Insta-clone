@@ -1,0 +1,43 @@
+.upload-container {
+    width: 350px;
+    margin: 50px auto;
+    font-family: sans-serif;
+}
+
+.upload-box {
+    border: 2px dashed #7b4dff;
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s ease;
+    color: #7b4dff;
+}
+
+.upload-box.dragging {
+    background-color: var(--ig-white-alpha-10);
+}
+
+.upload-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.file-preview {
+    margin-top: 20px;
+    background: var(--ig-white-alpha-10);
+    padding: 12px 20px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--ig-blue-60);
+}
+
+.file-preview button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--ig-red-error);
+}
